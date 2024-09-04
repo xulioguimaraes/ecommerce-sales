@@ -20,7 +20,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className="w-full flex">
+    <div className="w-full flex fixed z-10 bg-white">
       <nav className="w-full relative flex flex-wrap mx-4 items-center justify-between py-8 px-4 lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure>
@@ -104,7 +104,7 @@ export const Navbar = () => {
           </ul>
         </div>
 
-        <div className=" mr-3 space-x-4 lg:flex nav__item flex items-center">
+        <div className="hidden mr-3 space-x-4 lg:flex nav__item  items-center">
           <MdSearch size={24} />
 
           <FiUser size={24} />
