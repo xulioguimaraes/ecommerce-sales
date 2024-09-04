@@ -51,7 +51,7 @@ export const CarouselSession = () => {
   return (
     <div id="default-carousel" className="relative w-full">
       {/* Carousel wrapper */}
-      <div className="relative h-[50vh] overflow-hidden">
+      <div className="relative h-[472px] overflow-hidden">
         {data.map((slide, index) => (
           <div
             key={index}
@@ -62,7 +62,12 @@ export const CarouselSession = () => {
           >
             <img
               src={slide.imageBackground}
-              className="block w-full h-full object-cover"
+              className="hidden sm:block   w-full h-full object-cover"
+              alt={`Slide ${index + 1}`}
+            />
+             <img
+              src={slide.imageBackgroundMobile}
+              className="sm:hidden block w-full h-full object-cover"
               alt={`Slide ${index + 1}`}
             />
           </div>
