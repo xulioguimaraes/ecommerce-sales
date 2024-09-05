@@ -9,6 +9,7 @@ interface CarouselPaginateProps {
   onClick: (props1: any, props2: any, props3: any) => any;
   currentId: number;
   setCurrentId: (number: number) => void;
+  isAnimate?: boolean;
 }
 
 export const CarouselPaginate = ({
@@ -19,6 +20,7 @@ export const CarouselPaginate = ({
   onClick,
   currentId = 1,
   setCurrentId,
+  isAnimate,
 }: CarouselPaginateProps) => {
   const [ids, setIds] = useState<
     { id: number; initRange: number; range: number }[]
@@ -71,7 +73,11 @@ export const CarouselPaginate = ({
     }
   }, [active]);
   return (
-    <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+    <div
+      className={`absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse ${
+        isAnimate ? "bottom-[-28px]" : ""
+      }`}
+    >
       {ids.map((item, i) => {
         return (
           <button
