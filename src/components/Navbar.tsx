@@ -20,8 +20,8 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className="w-full flex fixed z-10 bg-white">
-      <nav className="w-full relative flex flex-wrap mx-4 items-center justify-between py-8 px-4 lg:justify-between xl:px-0">
+    <div className="w-full flex justify-center fixed z-50 bg-white dark:bg-trueGray-900">
+      <nav className="w-full max-w-[1420px] relative flex flex-wrap px-12 items-center justify-between py-8  lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure>
           {({ open }) => (
@@ -33,7 +33,7 @@ export const Navbar = () => {
                       <img
                         src="https://cdn.dooca.store/149698/files/logo-aguaazul-dark.svg?v=1708956371&webp=0"
                         alt="N"
-                        className="w-[150px]"
+                        className="w-[150px] bg-white rounded-full py-2 px-6"
                       />
                     </span>
                   </span>

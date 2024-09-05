@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   html,
-  body {
+  body,
+  nav {
     @apply dark:bg-trueGray-900;
   }
 }
@@ -19,4 +18,3 @@
     transform: translateX(-100%);
   }
 }
-

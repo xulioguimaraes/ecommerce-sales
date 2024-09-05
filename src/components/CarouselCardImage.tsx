@@ -9,6 +9,7 @@ import {
   Navigation,
   Pagination,
   Scrollbar,
+  Autoplay, // Importando o módulo Autoplay
 } from "swiper/modules";
 import { CarouselPaginate } from "./CarouselPaginate";
 
@@ -62,34 +63,15 @@ const cards: Card[] = [
     description: "This is the fifth card",
     image: "https://cdn.dooca.store/149698/files/02-9.png?v=1719859069&webp=0",
   },
-
-  // Adicione mais cards conforme necessário
 ];
+
 export const CarouselCardImage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardsPerPage = 4;
   const [swiper, setSwiper] = useState<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(0);
-  const totalCards = [...cards, ...cards, ...cards].length;
-  const totalPages = Math.ceil(cards.length / cardsPerPage);
+  const totalCards = cards.length;
   const [hideNext, setHideNext] = useState(false);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalCards);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalCards) % totalCards);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleSlideTo = async (init: any, range: any, hasMore: any) => {
     const breakpoints = swiperBreakpoints;
@@ -99,24 +81,14 @@ export const CarouselCardImage = () => {
     if (cards.length > range || !hasMore) {
       swiper.slideTo(init - 1);
 
-      if (true) {
-        if (range >= perPage * cards.length) {
-          setHideNext(true);
-        } else {
-          setHideNext(false);
-        }
-        return;
+      if (range >= perPage * cards.length) {
+        setHideNext(true);
       } else {
-        if (range >= perPage * 6) {
-          setHideNext(true);
-        } else {
-          setHideNext(false);
-        }
-        return;
+        setHideNext(false);
       }
+      return;
     }
 
-    //await getByIndex();
     swiper.slideTo(init - 1);
 
     if (range >= perPage * 6) {
@@ -126,11 +98,23 @@ export const CarouselCardImage = () => {
     }
   };
 
+  // Atualizar a paginação com base no slide ativo
+  useEffect(() => {
+    if (swiper) {
+      // Se o índice ativo for maior que o número de cards, reseta para o primeiro
+      if (swiper.realIndex >= totalCards) {
+        setCurrentIndex(0); // Volta para o primeiro item na paginação
+      } else {
+        setCurrentIndex(swiper.realIndex); // Atualiza o índice atual
+      }
+    }
+  }, [activeIndex, swiper]);
+
   return (
     <Container>
       <div className="relative w-full overflow-hidden">
         <Swiper
-          spaceBetween={50}
+          spaceBetween={20}
           slidesPerView={3}
           breakpoints={swiperBreakpoints}
           onResize={(e) => {
@@ -138,7 +122,7 @@ export const CarouselCardImage = () => {
             setSwiper(e);
           }}
           onSlideChange={(e) => {
-            setActiveIndex(e.snapIndex);
+            setActiveIndex(e.realIndex); // Atualiza o índice ativo
             setLastIndex(e.snapGrid.length - 1);
             setSwiper(e);
             if (e.snapIndex === e.snapGrid.length - 1) {
@@ -146,29 +130,46 @@ export const CarouselCardImage = () => {
             }
           }}
           onSwiper={(e) => {
-            setActiveIndex(e.snapIndex);
+            setActiveIndex(e.realIndex);
             setLastIndex(e.snapGrid.length - 1);
             setSwiper(e);
           }}
-          modules={[Navigation, Pagination, Scrollbar, A11y, EffectCards]}
+          modules={[
+            Navigation,
+            Pagination,
+            Scrollbar,
+            A11y,
+            EffectCards,
+            Autoplay,
+          ]} // Inclui o Autoplay
           loop={true}
           autoplay={{
-            delay: 500,
+            delay: 3000, // Intervalo de tempo entre os slides
+            disableOnInteraction: false, // Continua mesmo após interação
           }}
         >
           {cards.map((item) => (
             <SwiperSlide key={item.description}>
-              <img src={item.image} alt={item.description} />
+              <div className="flex justify-center">
+                <img
+                  className="w-full rounded-3xl"
+                  src={item.image}
+                  alt={item.description}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
+
         {/* Slider indicators */}
         {cards.length > 0 && (
           <CarouselPaginate
             total={cards.length}
             swiper={swiper}
             breakpoints={swiperBreakpoints}
-            active={activeIndex}
+            active={activeIndex} // Passa o slide ativo atual
+            currentId={currentIndex}
+            setCurrentId={setCurrentIndex}
             onClick={handleSlideTo}
           />
         )}

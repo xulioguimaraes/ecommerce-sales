@@ -29,13 +29,20 @@ const data = [
 export const InfoSales = () => {
   return (
     <Container>
-      <div className="flex sm:flex-col md:flex-row items-center justify-center lg:flex-row gap-4">
+      <div className="flex flex-col sm:flex-col md:flex-row items-center justify-center lg:flex-row gap-4">
         {data.map((item) => (
-          <div key={item.title} className="flex gap-4 lg:w-72 items-center">
+          <div
+            key={item.title}
+            className="flex justify-between lg:justify-normal md:justify-normal w-full gap-4 lg:w-72 items-center"
+          >
             {item.icon}
             <div>
-              <h6 className="font-bold text-lg leading-5">{item.title}</h6>
-              <p className="text-gray-500">{item.subtitle}</p>
+              <h6 className="font-bold text-lg leading-5 lg:text-start md:text-end text-end">
+                {item.title}
+              </h6>
+              <p className="text-gray-500 lg:text-start md:text-end text-end">
+                {item.subtitle}
+              </p>
             </div>
           </div>
         ))}
