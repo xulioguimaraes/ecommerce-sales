@@ -174,7 +174,7 @@ export const CorouselAnimateHover = () => {
         >
           {cards.map((item) => (
             <SwiperSlide key={item.description}>
-              <div className="flex flex-col justify-center transition-transform transform hover:-translate-y-2 cursor-pointer z-10">
+              <div className="mt-4 flex flex-col justify-center transition-transform transform hover:-translate-y-2 cursor-pointer z-10">
                 <img
                   className="w-full rounded-3xl"
                   src={item.image}
