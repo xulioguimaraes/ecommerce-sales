@@ -5,11 +5,11 @@ import "./globals.css";
 
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { PopupWidget }  from "@/components/PopupWidget";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import { PopupWidget } from "@/components/PopupWidget";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,10 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} `}>
         <ThemeProvider attribute="class">
           <Navbar />
-          <div>{children}</div>
+          <div className="pt-24">{children}</div>
           <Footer />
           <PopupWidget />
         </ThemeProvider>

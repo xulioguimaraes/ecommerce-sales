@@ -47,7 +47,7 @@ export const CarouselSession = () => {
   }, []);
 
   return (
-    <div className="pt-24">
+    <div className="">
       <div id="default-carousel" className="relative w-full pt-24">
         {/* Carousel wrapper */}
         <div className=" md:h-[472px] lg:h-[70vh] sm:h-[80vh] h-[60vh] overflow-hidden">

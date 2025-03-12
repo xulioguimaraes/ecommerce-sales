@@ -1,9 +1,7 @@
 "use client";
 import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
-import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
-import { FaUser } from "react-icons/fa";
 import { MdSearch } from "react-icons/md";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 
@@ -20,7 +18,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className="w-full flex justify-center fixed z-50 bg-white dark:bg-trueGray-900">
+    <div className="w-full flex justify-center fixed z-50 bg-white dark:bg-trueGray-900 ">
       <nav className="w-full max-w-[1420px] relative flex flex-wrap px-12 items-center justify-between py-8  lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure>
@@ -108,8 +106,9 @@ export const Navbar = () => {
           <MdSearch size={24} />
 
           <FiUser size={24} />
-
-          <FiShoppingCart size={24} />
+          <Link href={"/carrinho"}>
+            <FiShoppingCart size={24} />
+          </Link>
           <div className="relative w-7 h-7 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
             <svg
               className="absolute w-9 h-9 text-gray-400 -left-1"
